@@ -1,0 +1,12 @@
+﻿metric,value
+total_judgments,742.0
+direct_judgments,471.0
+chunk_candidate_judgments,271.0
+direct_percent,63.48
+chunk_candidate_percent,36.52
+direct_median_chars,2168.0
+chunk_median_chars,14414.0
+direct_median_words,371.0
+chunk_median_words,2631.0
+case_types,4.0
+languages,1.0

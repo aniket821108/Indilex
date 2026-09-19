@@ -1,0 +1,132 @@
+# ===========================
+# INDILEX .gitignore
+# ===========================
+
+# ── Python ──
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ── Jupyter ──
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+
+# ── Virtual Environments ──
+venv/
+env/
+.venv/
+.env
+
+# ── OS Files ──
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+
+# ── IDE ──
+.vscode/
+.idea/
+*.code-workspace
+
+# ── Large Data Files (hosted on HuggingFace) ──
+final_merged_hindi.csv
+final_merged_hindi_cleaned.csv
+merged_hindi_clean.csv
+Hindi_clean_rows.csv
+Hindi_clean_rows_final*.csv
+hindi_not_clearly_specified_rows.csv
+INDILEX_chunk_candidates.csv
+INDILEX_direct_annotation.csv
+Chhattisgarh_dataset.xlsx
+legal_Assamese_dataset.xlsx
+Allahabad_criminal_merged*.xlsx
+Allahabad_criminal_reasoning_sample.xlsx
+199case_output_Qwen14B.xlsx
+20case_output_Qwen14B.xlsx
+indilex_extracted_output.xlsx
+
+# ── Nested ZIP Files ──
+*.zip
+
+# ── Raw Data Directories (hosted on HuggingFace) ──
+Chhattisgarh/
+Assamese_OCR/
+batch_data/
+batch_data_chunk/
+batch_data_direct/
+extracted_chunk_data/
+extracted_direct_data/
+routed_dataset/
+prserve/
+final/
+
+# ── Annotation Distribution (internal) ──
+Direct_Annotation_persion/
+chunk_Annotation_persion/
+temp_extracted_annotation/
+
+# ── Temporary/Generated Files ──
+corrupted_rows_for_recovery.csv
+missing_judgment_rows.csv
+suspicious_short_judgments.csv
+invalid_case_types.csv
+*_checkpoint.csv
+*_checkpoint_meta.json
+*_run.log
+
+# ── Old Root-Level Files (now reorganized) ──
+# These are the originals that have been copied to their new locations.
+# They remain on disk for safety but should not be committed.
+legal_dataset_pipeline.ipynb
+judgment_extraction_pipeline.ipynb
+INDILEX_Dataset_Length_Audit.ipynb
+indilex_batch_annotation.ipynb
+Hindi_Annotation_Pipeline.ipynb
+model_selection.ipynb
+Hindi_Legal_Visualizations.ipynb
+Scripts_for*general_work.ipynb
+indilex_extraction_Qwen.ipynb
+indilex_extraction_Qwen2.5-14B.ipynb
+indilex_extraction_Qwen_14B.ipynb
+indilex_extraction_DeepSeek.ipynb
+indilex_extraction_Gemma.ipynb
+model_evaluation_Qwen.ipynb
+model_evaluation_Qwen2.5-14B.ipynb
+model_evaluation_DeepSeek.ipynb
+model_evaluation_Gemma.ipynb
+
+# ── Old Root-Level PNGs/XLSX (now in results/) ──
+/01_case_type_distribution.png
+/02_missing_data_heatmap.png
+/03_top_subjects.png
+/04_top_objects.png
+/05_text_length_violin_box.png
+/06_word_count_histogram.png
+/07_top_objective_aspects.png
+/08_casetype_remedy_heatmap.png
+/09_legal_issues_stacked.png
+/10_wordclouds.png
+/11_summary_dashboard.png
+/evaluation_dashboard_for10_sample.png
+/enriched_legal_records.xlsx
+/indilex_extracted_output_Qwen.xlsx
+/indilex_extracted_output_Qwen14B.xlsx
+/indilex_extracted_output_DeepSeek.xlsx
+/indilex_extracted_output_Gemma.xlsx
+
+# ── Archive Directory ──
+archive/
+
+# ── Audit Reports (original location) ──
+/audit_reports/
+
+# ── Logs ──
+*.log

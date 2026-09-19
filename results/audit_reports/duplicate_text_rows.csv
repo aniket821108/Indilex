@@ -1,0 +1,5 @@
+﻿case_id,case_type,route,char_count
+CHG_CRI_000064,Criminal,direct,6315
+CHG_CRI_000065,Criminal,direct,6315
+MP_ADM_000011,Administrative,chunk_candidate,8014
+MP_CON_000002,Constitutional,chunk_candidate,7959

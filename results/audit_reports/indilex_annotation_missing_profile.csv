@@ -1,0 +1,7 @@
+﻿column,missing_rows,present_rows,missing_percent
+subject,14,728,1.89
+object,14,728,1.89
+objective_aspect,14,728,1.89
+subjective_aspect,14,728,1.89
+legal_provision,742,0,100.0
+reasoning,742,0,100.0

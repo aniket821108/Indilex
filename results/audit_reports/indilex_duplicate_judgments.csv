@@ -1,0 +1,5 @@
+﻿case_id,language,case_type,_source_file,_source_path,_source_row,_encoding_used,_is_empty_judgment,_duplicate_case_id,_duplicate_judgment,char_count,word_count,token_count,length_bucket,routing_decision,annotation_state
+CHG_CRI_000064,Hindi,Criminal,final_merged_hindi_cleaned.csv,final_merged_hindi_cleaned.csv,173,utf-8-sig,False,False,True,6315,1164,5760,4K-8K,direct,partial
+CHG_CRI_000065,Hindi,Criminal,final_merged_hindi_cleaned.csv,final_merged_hindi_cleaned.csv,174,utf-8-sig,False,False,True,6315,1164,5760,4K-8K,direct,partial
+MP_ADM_000011,Hindi,Administrative,final_merged_hindi_cleaned.csv,final_merged_hindi_cleaned.csv,575,utf-8-sig,False,False,True,8014,1439,7309,4K-8K,chunk_candidate,partial
+MP_CON_000002,Hindi,Constitutional,final_merged_hindi_cleaned.csv,final_merged_hindi_cleaned.csv,578,utf-8-sig,False,False,True,7959,1439,7268,4K-8K,chunk_candidate,partial

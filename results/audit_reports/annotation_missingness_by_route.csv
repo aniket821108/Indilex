@@ -1,0 +1,13 @@
+﻿route,annotation_field,rows,missing,present,missing_percent
+direct,subject,471,0,471,0.0
+direct,object,471,0,471,0.0
+direct,objective_aspect,471,0,471,0.0
+direct,subjective_aspect,471,0,471,0.0
+direct,legal_provision,471,471,0,100.0
+direct,reasoning,471,471,0,100.0
+chunk_candidate,subject,271,14,257,5.17
+chunk_candidate,object,271,14,257,5.17
+chunk_candidate,objective_aspect,271,14,257,5.17
+chunk_candidate,subjective_aspect,271,14,257,5.17
+chunk_candidate,legal_provision,271,271,0,100.0
+chunk_candidate,reasoning,271,271,0,100.0
