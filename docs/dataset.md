@@ -109,7 +109,7 @@ If you use this dataset, please cite:
 ```bibtex
 @misc{indilex2026,
   title={INDILEX: Indian Legal Event Extraction Dataset and Benchmark},
-  author={[Your Name]},
+  author={Aniket Kumar},
   year={2026},
   note={Research internship project at IIT Patna}
 }
@@ -117,4 +117,4 @@ If you use this dataset, please cite:
 
 ## Licensing
 
-> ⚠️ License TBD — consult your institution regarding appropriate licensing.
+This project is licensed under the [MIT License](../LICENSE).

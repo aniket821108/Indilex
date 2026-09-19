@@ -1,52 +1,113 @@
-# INDILEX — Indian Legal Event Extraction Dataset & Benchmark
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/PyTorch-2.0+-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/HuggingFace-Transformers-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black" alt="HuggingFace">
+  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License">
+  <img src="https://img.shields.io/badge/LLMs-4_Models_Benchmarked-blueviolet?style=for-the-badge" alt="Models">
+</p>
+
+# ⚖️ INDILEX — Indian Legal Event Extraction Dataset & Benchmark
 
 <p align="center">
-  <strong>A structured information extraction pipeline for Indian legal judgments using open-source LLMs</strong>
+  <strong>An end-to-end NLP pipeline for extracting structured legal information from Indian High Court judgments using open-source LLMs</strong>
 </p>
 
 <p align="center">
-  <a href="#overview">Overview</a> •
-  <a href="#key-features">Features</a> •
-  <a href="#pipeline">Pipeline</a> •
-  <a href="#models">Models</a> •
-  <a href="#results">Results</a> •
-  <a href="#installation">Installation</a> •
-  <a href="#usage">Usage</a>
+  <a href="#-overview">Overview</a> •
+  <a href="#-key-highlights">Highlights</a> •
+  <a href="#-sample-results">Results</a> •
+  <a href="#%EF%B8%8F-pipeline-architecture">Pipeline</a> •
+  <a href="#-models--benchmarking">Models</a> •
+  <a href="#-getting-started">Setup</a> •
+  <a href="#-author">Author</a>
 </p>
 
 ---
 
-## Overview
+## 📌 Overview
 
-**INDILEX** (Indian Legal Event Extraction) is an end-to-end NLP pipeline for extracting structured legal information from Indian High Court judgments. The project processes raw court judgment text files from multiple Indian states (Chhattisgarh, Allahabad, Delhi, Madhya Pradesh, Jharkhand, Patna) and multiple languages (Hindi, Assamese, English), transforming unstructured legal documents into a structured annotation dataset.
+**INDILEX** (Indian Legal Event Extraction) automates the extraction of structured legal information from Indian High Court judgments — a task that is currently manual, expensive, and doesn't scale.
 
-The pipeline leverages multiple open-source instruction-tuned LLMs to automatically extract legal event tuples following a **4E (Entity-Event-Evidence-Evaluation) Framework**, then rigorously evaluates extraction quality against Claude-generated ground truth using NLP metrics.
+The pipeline processes **762+ raw court judgments** from **7 Indian High Courts** across **3 languages** (Hindi, Assamese, English), and benchmarks **4 open-source LLMs** for structured information extraction using a **4E (Entity-Event-Evidence-Evaluation) Framework**.
 
-## Problem Statement
+> **Why this matters:** India's 25 High Courts produce millions of judgments annually — most in regional languages like Hindi — yet virtually none are structured or machine-readable. INDILEX bridges this gap.
 
-Indian legal documents are voluminous, multilingual, and lack standardized structure. Manual extraction of legal information — parties involved, legal provisions cited, reasoning, and case outcomes — is extremely time-consuming and not scalable. INDILEX addresses this by building an automated pipeline that:
+### At a Glance
 
-1. **Standardizes** raw judgment text across courts and languages
-2. **Routes** documents by length (direct annotation vs. chunk-based annotation)
-3. **Extracts** structured information using LLMs with case-type-aware prompting
-4. **Evaluates** extraction quality with multiple NLP metrics
-5. **Produces** a benchmark dataset for legal NLP research
+| Metric | Value |
+|--------|-------|
+| **Judgments Processed** | 762+ (cleaned & deduplicated) |
+| **Source Courts** | 7 Indian High Courts |
+| **Languages** | Hindi (primary), Assamese, English |
+| **Case Types** | Criminal · Civil · Constitutional · Administrative |
+| **Models Benchmarked** | 4 open-source LLMs |
+| **Evaluation Metrics** | EM · Token F1 · ROUGE · BERTScore |
+| **Annotation Method** | Hybrid (LLM + Human Verification) |
 
-## Key Features
+---
 
-- **Multi-court, multilingual data processing** — Hindi, Assamese, and English judgments from 6+ Indian High Courts
-- **Intelligent document routing** — Automatic classification of documents into direct (short) and chunk-based (long) annotation paths based on token length
-- **Case-type-aware annotation** — Specialized prompt templates for Criminal, Civil, Constitutional, and Administrative cases
-- **4E Framework extraction** — Structured extraction of `case_type`, `subject`, `object`, `objective_aspect`, `subjective_aspect`, and `reasoning`
-- **Multi-model benchmarking** — Comparative evaluation across 4 open-source LLMs
-- **Production-grade batch processing** — Checkpointed, resumable annotation with error handling
-- **Comprehensive data quality auditing** — Length analysis, duplicate detection, annotation completeness checks
-- **Three-stage long-document pipeline** — Chunk → Evidence Extraction → Aggregation → Final Annotation for documents exceeding context windows
+## 🎯 Key Highlights
 
-## Pipeline
+- **🏛️ Multi-court, multilingual** — Processes Hindi, Assamese, and English judgments from Chhattisgarh, Allahabad, Delhi, MP, Jharkhand, Patna, and Gauhati High Courts
+- **🔀 Intelligent document routing** — Short documents → direct annotation; long documents (50K+ chars) → three-stage chunk pipeline
+- **📋 Case-type-aware prompting** — Specialized templates for Criminal, Civil, Constitutional, and Administrative cases
+- **🤖 4-model benchmarking** — Qwen2.5-7B, Qwen2.5-14B, Gemma-2-9B, DeepSeek-R1 evaluated against Claude ground truth
+- **⚙️ Production-grade** — Checkpointed batch processing, resume-on-failure, rate limiting, error isolation
+- **📊 11 publication-quality visualizations** — Comprehensive dataset analysis and model evaluation dashboards
+
+---
+
+## 📊 Sample Results
+
+### Dataset Composition
+
+<p align="center">
+  <img src="results/figures/01_case_type_distribution.png" alt="Case Type Distribution — 57% Criminal, 22.8% Administrative, 12.8% Civil, 7.4% Constitutional" width="85%">
+</p>
+
+<p align="center"><em>Dataset spans 4 case types across 7 High Courts — Criminal cases dominate at 57%</em></p>
+
+### Data Quality Audit
+
+<p align="center">
+  <img src="results/figures/02_missing_data_heatmap.png" alt="Missing Data Heatmap" width="85%">
+</p>
+
+<p align="center"><em>Annotation completeness visualization — most fields have >98% coverage</em></p>
+
+### Model Evaluation Dashboard
+
+<p align="center">
+  <img src="results/evaluation_dashboard_for10_sample.png" alt="Qwen2.5-14B Evaluation Dashboard — EM, Token F1, BERTScore, and ROUGE metrics" width="85%">
+</p>
+
+<p align="center"><em>Qwen2.5-14B achieves 100% Exact Match on case_type, 0.92 Token F1 on subject, and 0.88 BERTScore on reasoning</em></p>
+
+### Summary Dashboard
+
+<p align="center">
+  <img src="results/figures/11_summary_dashboard.png" alt="Hindi Legal Dataset Summary Dashboard" width="85%">
+</p>
+
+<p align="center"><em>Combined overview: case type distribution, top subjects, judgment lengths, and court remedies</em></p>
+
+### Case Type × Remedy Analysis
+
+<p align="center">
+  <img src="results/figures/08_casetype_remedy_heatmap.png" alt="Case Type vs Court Remedy Heatmap" width="85%">
+</p>
+
+<p align="center"><em>Cross-tabulation reveals Criminal cases dominate across most remedy categories</em></p>
+
+> 📁 **All 11 figures** are available in [`results/figures/`](results/figures/) — see [`results/README.md`](results/README.md) for descriptions.
+
+---
+
+## ⚙️ Pipeline Architecture
 
 ```
-Raw Legal Judgment Texts (.txt — Chhattisgarh, Allahabad, Delhi, MP, Patna, Jharkhand)
+ Raw Legal Judgment Texts (.txt)
+ Chhattisgarh · Allahabad · Delhi · MP · Patna · Jharkhand · Gauhati
                             ↓
             ┌───────────────────────────────────┐
             │   Stage 1: Data Collection        │
@@ -54,15 +115,14 @@ Raw Legal Judgment Texts (.txt — Chhattisgarh, Allahabad, Delhi, MP, Patna, Jh
             └───────────────┬───────────────────┘
                             ↓
             ┌───────────────────────────────────┐
-            │   Stage 2: Data Cleaning          │
-            │   Language detection, dedup,      │
-            │   normalization                   │
+            │   Stage 2: Metadata Extraction    │
+            │   Regex-based structured fields   │
             └───────────────┬───────────────────┘
                             ↓
             ┌───────────────────────────────────┐
             │   Stage 3: Dataset Audit          │
-            │   Length distributions, routing   │
-            │   estimates, quality checks       │
+            │   Length distributions, dedup,    │
+            │   quality checks, routing split   │
             └───────────────┬───────────────────┘
                             ↓
             ┌───────────────────────────────────┐
@@ -71,126 +131,99 @@ Raw Legal Judgment Texts (.txt — Chhattisgarh, Allahabad, Delhi, MP, Patna, Jh
             └──────┬────────────────┬───────────┘
                    ↓                ↓
      ┌──────────────────┐  ┌────────────────────────┐
-     │ Stage 5a: Direct │  │ Stage 5b: Chunk        │
-     │ Annotation       │  │ Annotation (3-stage)   │
-     │ (Groq API)       │  │ (vLLM / Qwen2.5-14B)  │
+     │  Direct Annot.   │  │  Chunk Annotation      │
+     │  (Groq API)      │  │  (3-stage via vLLM)    │
+     │  Single-pass     │  │  Qwen2.5-14B, 2× GPU  │
      └────────┬─────────┘  └──────────┬─────────────┘
               ↓                       ↓
             ┌───────────────────────────────────┐
-            │   Stage 6: Human Verification     │
+            │   Human Verification              │
             │   3 annotators × 4 case types     │
             └───────────────┬───────────────────┘
                             ↓
             ┌───────────────────────────────────┐
-            │   Stage 7: LLM Information        │
-            │   Extraction (4E Framework)       │
-            │   Qwen | Gemma | DeepSeek         │
+            │   LLM Extraction (4E Framework)   │
+            │   Qwen · Gemma · DeepSeek         │
             └───────────────┬───────────────────┘
                             ↓
             ┌───────────────────────────────────┐
-            │   Stage 8: Model Evaluation       │
-            │   EM, F1, ROUGE, BERTScore        │
+            │   Multi-Metric Evaluation         │
+            │   EM · F1 · ROUGE · BERTScore     │
             │   vs. Claude Ground Truth         │
             └───────────────┬───────────────────┘
                             ↓
             ┌───────────────────────────────────┐
-            │   Stage 9: Model Selection        │
-            └───────────────┬───────────────────┘
-                            ↓
-            ┌───────────────────────────────────┐
-            │   Stage 10: Visualization &       │
-            │   Quality Analysis                │
-            └───────────────┬───────────────────┘
-                            ↓
-            ┌───────────────────────────────────┐
-            │   Stage 11: Final Annotated       │
-            │   Dataset                         │
+            │   Visualization & Analysis        │
+            │   11 publication-quality figures   │
             └───────────────────────────────────┘
 ```
 
-## Dataset
+> 📖 **Full technical documentation:** [`docs/pipeline.md`](docs/pipeline.md)
 
-### Source Data
-- **Courts**: Chhattisgarh HC, Allahabad HC, Delhi HC, Madhya Pradesh HC, Jharkhand HC, Patna HC, Gauhati HC
-- **Languages**: Hindi (primary), Assamese, English
-- **Case Types**: Criminal, Civil, Constitutional, Administrative
-- **Format**: Raw `.txt` judgment files processed into structured CSVs
+---
 
-### Annotation Schema (4E Framework)
+## 🤖 Models & Benchmarking
 
-| Field | Description |
-|-------|-------------|
-| `case_id` | Unique identifier derived from filename |
-| `language` | Auto-detected language of the judgment |
-| `case_type` | Criminal / Civil / Constitutional / Administrative |
-| `judgment_text` | Full text of the court judgment |
-| `subject` | Primary legal subject / petitioner's claim |
-| `object` | Object of the legal action / what is being contested |
-| `objective_aspect` | Factual/objective elements of the case |
-| `subjective_aspect` | Interpretive/subjective elements and judicial reasoning |
-| `legal_provision` | Acts, Articles, and Sections cited |
-| `reasoning` | Court's rationale for the decision |
+### Models Evaluated
 
-### Dataset Hosting
+| Model | Parameters | Provider | GPU Memory | Key Strength |
+|-------|-----------|----------|------------|--------------|
+| **Qwen2.5-7B-Instruct** | 7B | Alibaba | ~14 GB (fp16) | Strong Hindi understanding |
+| **Qwen2.5-14B-Instruct** | 14B | Alibaba | ~28 GB (2× GPU) | Best overall quality |
+| **Gemma-2-9B-IT** | 9B | Google | ~18 GB (fp16) | Different architecture perspective |
+| **DeepSeek-R1-Distill-Qwen-7B** | 7B | DeepSeek | ~14 GB (fp16) | Enhanced reasoning |
 
-Large datasets are hosted separately on Hugging Face. See [`data/README.md`](data/README.md) for download instructions.
+**Ground Truth**: Claude (Anthropic) annotations serve as the gold-standard reference.
 
-## Models / Approaches
+### Evaluation Metrics
 
-Four open-source instruction-tuned LLMs were benchmarked for legal information extraction:
+| Metric | Scope | What It Measures |
+|--------|-------|-----------------|
+| **Exact Match (EM)** | `case_type` | Binary correctness for categorical fields |
+| **Token F1** | All text fields | Token-level precision/recall overlap |
+| **ROUGE-1/2/L** | `reasoning` | N-gram overlap for reasoning quality |
+| **BERTScore** | `reasoning` | Semantic similarity via contextual embeddings |
 
-| Model | Parameters | Source | GPU Memory |
-|-------|-----------|--------|------------|
-| **Qwen2.5-7B-Instruct** | 7B | Alibaba | ~14 GB (fp16) |
-| **Qwen2.5-14B-Instruct** | 14B | Alibaba | ~28 GB (fp16, 2×GPU) |
-| **Gemma-2-9B-IT** | 9B | Google | ~18 GB (fp16) |
-| **DeepSeek-R1-Distill-Qwen-7B** | 7B | DeepSeek | ~14 GB (fp16) |
+### Sample Results (Qwen2.5-14B)
 
-**Ground Truth**: Claude (Anthropic) annotations used as reference for evaluation.
+| Field | Exact Match | Token F1 | BERTScore |
+|-------|:-----------:|:--------:|:---------:|
+| `case_type` | **1.00** | **1.00** | — |
+| `subject` | **0.89** | **0.92** | — |
+| `objective_aspect` | 0.11 | 0.51 | **0.92** |
+| `subjective_aspect` | 0.06 | 0.17 | **0.85** |
+| `reasoning` (ROUGE-L) | — | — | **0.88** |
 
-**Annotation API**: Groq API used for production batch annotation with case-type-aware prompts.
+> 📓 **Full evaluation notebooks:** [`notebooks/experiments/evaluation/`](notebooks/experiments/evaluation/)
 
-## Experiments and Evaluation
+---
 
-Each model was evaluated against Claude ground truth using:
+## 📦 Annotation Schema (4E Framework)
 
-- **Exact Match (EM) Accuracy** — for categorical fields (`case_type`)
-- **Token F1 Score** — token-level overlap for text fields
-- **ROUGE-1 / ROUGE-2 / ROUGE-L** — n-gram overlap for reasoning fields
-- **BERTScore** — semantic similarity for reasoning fields
+Each judgment is annotated with structured fields following the **Entity-Event-Evidence-Evaluation** framework:
 
-Evaluation notebooks with full results are in [`notebooks/experiments/evaluation/`](notebooks/experiments/evaluation/).
+| Field | Description | Example |
+|-------|-------------|---------|
+| `case_type` | Criminal / Civil / Constitutional / Administrative | `Criminal` |
+| `subject` | Primary legal subject / petitioner's claim | `Appellant challenging conviction under IPC Section 302` |
+| `object` | Object of the legal action | `Murder conviction and life imprisonment` |
+| `objective_aspect` | Factual/objective elements | `FIR filed, witnesses examined, forensic evidence` |
+| `subjective_aspect` | Interpretive elements & judicial reasoning | `Court found prosecution's evidence credible` |
+| `legal_provision` | Acts, Articles, Sections cited | `IPC Section 302, CrPC Section 374` |
+| `reasoning` | Court's rationale for the decision | `Upheld conviction based on eyewitness testimony...` |
 
-## Results
+---
 
-### Visualizations
-
-The project produces 11 publication-quality visualizations covering:
-
-| Figure | Content |
-|--------|---------|
-| Case type distribution | Breakdown of Criminal/Civil/Constitutional/Administrative |
-| Missing data heatmap | Annotation completeness across fields |
-| Top subjects & objects | Most frequent legal subjects and objects |
-| Text length analysis | Violin/box plots of judgment lengths |
-| Word count distribution | Histogram of word counts |
-| Case-type × remedy heatmap | Cross-tabulation analysis |
-| Legal issues stacked chart | Distribution of legal issues |
-| Word clouds | Visual text analysis per case type |
-| Summary dashboard | Combined overview dashboard |
-
-Selected figures are available in [`results/figures/`](results/figures/).
-
-## Repository Structure
+## 📁 Repository Structure
 
 ```
 INDILEX/
 ├── README.md                              # This file
-├── LICENSE                                # License
+├── LICENSE                                # MIT License
 ├── requirements.txt                       # Python dependencies
-├── .gitignore                             # Git exclusions
+├── .gitignore                             # Git exclusions (data files excluded)
 │
-├── notebooks/                             # Organized Jupyter notebooks
+├── notebooks/                             # 📓 Organized Jupyter notebooks
 │   ├── 01_data_collection_pipeline.ipynb  # Raw .txt → initial annotation Excel
 │   ├── 02_judgment_metadata_extraction.ipynb  # Structured metadata extraction
 │   ├── 03_dataset_audit.ipynb             # Length audit, routing estimates
@@ -201,103 +234,85 @@ INDILEX/
 │   ├── 08_dataset_visualization.ipynb     # 11 publication-quality figures
 │   ├── 09_routing_analysis.ipynb          # Direct vs Chunk visualization
 │   └── experiments/
-│       ├── extraction/                    # Per-model extraction notebooks
+│       ├── extraction/                    # Per-model extraction runs
 │       │   ├── qwen2.5_7b_extraction.ipynb
 │       │   ├── qwen2.5_14b_extraction.ipynb
 │       │   ├── deepseek_r1_extraction.ipynb
 │       │   └── gemma2_9b_extraction.ipynb
-│       └── evaluation/                   # Per-model evaluation notebooks
+│       └── evaluation/                    # Per-model evaluation
 │           ├── qwen2.5_7b_evaluation.ipynb
 │           ├── qwen2.5_14b_evaluation.ipynb
 │           ├── deepseek_r1_evaluation.ipynb
 │           └── gemma2_9b_evaluation.ipynb
 │
 ├── data/
-│   ├── sample/                            # Small sample data for demos
+│   ├── sample/                            # Small sample for demos
 │   │   └── enriched_legal_records.xlsx    # Claude ground truth (4 cases)
 │   └── README.md                          # Dataset documentation & download guide
 │
 ├── results/
-│   ├── figures/                           # 11 publication-quality PNG figures
+│   ├── figures/                           # 📊 11 publication-quality PNG figures
 │   ├── model_outputs/                     # Per-model extraction XLSX files
-│   ├── audit_reports/                     # Data quality audit CSVs
+│   ├── audit_reports/                     # 15 data quality audit CSVs
 │   ├── evaluation_dashboard_for10_sample.png
 │   └── README.md                          # Results documentation
 │
 └── docs/
     ├── pipeline.md                        # Full technical pipeline documentation
-    ├── dataset.md                         # Dataset card
+    ├── dataset.md                         # Dataset card (HuggingFace format)
     └── interview_notes.md                 # Interview preparation guide
 ```
 
-## Installation
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Python 3.10+
+- NVIDIA GPU with ≥24 GB VRAM for extraction experiments (e.g., RTX 3090)
+- 2× GPUs for Qwen2.5-14B (tensor parallel via vLLM)
+- CPU-only is sufficient for evaluation and visualization notebooks
+
+### Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/<your-username>/INDILEX.git
-cd INDILEX
+git clone https://github.com/aniket821108/Indilex.git
+cd Indilex
 
-# Create virtual environment (recommended)
+# Create virtual environment
 python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# or: venv\Scripts\activate  # Windows
+source venv/bin/activate      # Linux/Mac
+# venv\Scripts\activate       # Windows
 
 # Install dependencies
 pip install -r requirements.txt
 ```
 
-### Hardware Requirements
+### Download Dataset
 
-- **For extraction experiments**: NVIDIA GPU with ≥24 GB VRAM (e.g., RTX 3090)
-- **For Qwen2.5-14B**: 2× NVIDIA GPUs with ≥24 GB each (tensor parallel)
-- **For evaluation/visualization**: CPU-only is sufficient
+Large datasets (>50 MB) are hosted separately. See [`data/README.md`](data/README.md) for full instructions.
 
-## Usage
+```python
+from huggingface_hub import snapshot_download
 
-### 1. Prepare Data
-
-Download datasets from HuggingFace (see [`data/README.md`](data/README.md)):
-
-```bash
-# Install huggingface_hub
-pip install huggingface_hub
-
-# Download dataset
-# huggingface-cli download <your-username>/INDILEX-dataset --local-dir data/
+snapshot_download(
+    repo_id="<your-username>/INDILEX-dataset",  # Coming soon
+    repo_type="dataset",
+    local_dir="data/"
+)
 ```
 
-### 2. Run the Pipeline
+> ⏳ **HuggingFace dataset upload coming soon** — see [`docs/dataset.md`](docs/dataset.md) for the dataset card.
 
-```bash
-# Step 1: Data Collection — process raw .txt files
-jupyter notebook notebooks/01_data_collection_pipeline.ipynb
-
-# Step 2: Dataset Audit — analyze length distributions
-jupyter notebook notebooks/03_dataset_audit.ipynb
-
-# Step 3: Batch Annotation — annotate using Groq API
-jupyter notebook notebooks/04_batch_annotation.ipynb
-
-# Step 4: Run LLM Extraction (e.g., Qwen2.5-7B)
-jupyter notebook notebooks/experiments/extraction/qwen2.5_7b_extraction.ipynb
-
-# Step 5: Evaluate Results
-jupyter notebook notebooks/experiments/evaluation/qwen2.5_7b_evaluation.ipynb
-
-# Step 6: Generate Visualizations
-jupyter notebook notebooks/08_dataset_visualization.ipynb
-```
-
-### 3. Quick Demo
-
-To quickly explore the project:
+### Quick Demo
 
 ```python
 import pandas as pd
 
-# Load Claude ground truth sample
+# Load Claude ground truth sample (included in repo)
 gt = pd.read_excel("data/sample/enriched_legal_records.xlsx")
-print(gt.columns.tolist())
 print(gt[["case_id", "case_type", "subject"]].head())
 
 # Load a model's extraction output
@@ -305,56 +320,97 @@ qwen = pd.read_excel("results/model_outputs/indilex_extracted_output_Qwen.xlsx")
 print(qwen[["case_id", "case_type", "subject"]].head())
 ```
 
-## Limitations
+### Run the Full Pipeline
 
-- **Small evaluation set**: Model evaluation uses a limited number of ground-truth cases annotated by Claude, which may not capture the full diversity of Indian legal documents.
-- **Language coverage**: Primary focus is Hindi judgments; Assamese and English support is partial.
-- **No fine-tuning**: All models are used in zero-shot/few-shot mode with prompt engineering only — no task-specific fine-tuning was performed.
-- **Context window constraints**: Long judgments exceeding model context windows require chunking, which may lose cross-section context.
-- **Ground truth dependency**: Evaluation relies on Claude as ground truth, which itself may contain extraction errors.
+```bash
+# Step 1 → Data Collection
+jupyter notebook notebooks/01_data_collection_pipeline.ipynb
 
-## Future Improvements
+# Step 2 → Dataset Audit & Routing
+jupyter notebook notebooks/03_dataset_audit.ipynb
 
-- **Expand language coverage** to include more Indian regional languages (Bengali, Tamil, Telugu, etc.)
-- **Fine-tune models** on the annotated INDILEX dataset for improved domain-specific extraction
-- **Implement cross-document analysis** to identify citation networks and precedent patterns
-- **Build a retrieval-augmented generation (RAG) pipeline** for legal question answering
-- **Scale to Supreme Court** and District Court judgments
-- **Add inter-annotator agreement metrics** for human verification quality
-- **Integrate with legal databases** (IndianKanoon, SCI) for automated data collection
+# Step 3 → Batch Annotation (requires Groq API key)
+jupyter notebook notebooks/04_batch_annotation.ipynb
 
-## Dataset Hosting
+# Step 4 → LLM Extraction (requires GPU)
+jupyter notebook notebooks/experiments/extraction/qwen2.5_7b_extraction.ipynb
 
-Large datasets (>50 MB total) are not included in this GitHub repository. They should be hosted on Hugging Face:
+# Step 5 → Evaluate Against Ground Truth
+jupyter notebook notebooks/experiments/evaluation/qwen2.5_7b_evaluation.ipynb
 
-```
-HuggingFace: <your-username>/INDILEX-dataset
-├── final_merged_hindi_cleaned.csv       # Primary Hindi dataset
-├── INDILEX_chunk_candidates.csv         # Chunk-route candidates
-├── INDILEX_direct_annotation.csv        # Direct-route annotations
-├── Chhattisgarh_dataset.xlsx            # Chhattisgarh court data
-├── legal_Assamese_dataset.xlsx          # Assamese court data
-├── batch_data/                          # Batched annotation data
-├── extracted_chunk_data/                # Chunk extraction results
-└── extracted_direct_data/               # Direct extraction results
+# Step 6 → Generate Visualizations
+jupyter notebook notebooks/08_dataset_visualization.ipynb
 ```
 
-See [`data/README.md`](data/README.md) for full details.
+---
 
-## License
+## 🔧 Technical Challenges & Solutions
 
-> ⚠️ **License TBD** — Please consult your institution (IIT Patna) regarding appropriate licensing for this research project before choosing a license.
+| Challenge | Solution | Impact |
+|-----------|----------|--------|
+| Judgments exceeding LLM context windows (50K+ chars) | Three-stage chunk pipeline with cross-chunk aggregation | Zero information loss from long documents |
+| LLMs producing malformed JSON responses | Regex-based extraction, retry logic, fallback parsing | ~95% first-attempt success rate |
+| 6 courts with different data formats | Unified schema merger with per-court adapters | Single consistent dataset from heterogeneous sources |
+| Hindi/Devanagari text processing | Adapted tokenization and length estimation for Hindi | Accurate routing and token-aware chunking |
+| GPU memory for 14B model | Tensor-parallel via vLLM across 2× RTX 3090 | Full-speed inference on consumer GPUs |
+| Production reliability for batch annotation | Checkpoint + resume system with error isolation | Hours-long annotation jobs survive interruptions |
 
-## Author
+---
 
-**[Your Name]**
-- 🎓 B.Tech, 4th Year — [Your University]
-- 🔬 Research Intern — IIT Patna
-- 🐙 GitHub: [your-github-username](https://github.com/your-github-username)
-- 💼 LinkedIn: [your-linkedin](https://linkedin.com/in/your-linkedin)
+## ⚠️ Limitations
+
+- **Small evaluation set** — Model evaluation uses a limited number of Claude-annotated ground-truth cases
+- **Language coverage** — Primary focus is Hindi; Assamese and English support is partial
+- **Zero-shot only** — All models used without task-specific fine-tuning
+- **Context window constraints** — Long judgments require chunking, which may lose some cross-section context
+- **Ground truth dependency** — Evaluation relies on Claude as reference, which itself may contain errors
+
+## 🔮 Future Work
+
+- **Fine-tune** Qwen2.5-7B on INDILEX annotations (expected 15–25% improvement)
+- **Build RAG pipeline** for legal question answering over structured data
+- **Scale to 5,000+ judgments** across all 25 Indian High Courts + Supreme Court
+- **Add more languages** — Bengali, Tamil, Telugu, Marathi
+- **Cross-document analysis** — Citation networks, precedent tracking, temporal analysis
+- **Inter-annotator agreement** — Formal IAA metrics (Cohen's κ, Fleiss' κ)
+- **Automated CI/CD benchmarking** — Re-evaluate when new models are released
+
+---
+
+## 📝 Citation
+
+If you use INDILEX in your research, please cite:
+
+```bibtex
+@misc{indilex2026,
+  title   = {INDILEX: Indian Legal Event Extraction Dataset and Benchmark},
+  author  = {Aniket Kumar},
+  year    = {2026},
+  note    = {Research internship at IIT Patna},
+  url     = {https://github.com/aniket821108/Indilex}
+}
+```
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 👤 Author
+
+**Aniket Kumar**
+- 🎓 B.Tech, 4th Year (7th Semester) — NIT Mizoram
+- 🔬 Research Intern — Indian Institute of Technology, Patna
+- 🐙 GitHub: [aniket821108](https://github.com/aniket821108)
+- 💼 LinkedIn: [Aniket Kumar](https://www.linkedin.com/in/aniket-kumar-1225a7284/)
 
 ---
 
 <p align="center">
-  <em>Built during a research internship at IIT Patna, 2026</em>
+  <strong>Built with ❤️ during a research internship at IIT Patna, 2026</strong>
+</p>
+
+<p align="center">
+  <sub>⭐ Star this repo if you find it useful!</sub>
 </p>

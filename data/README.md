@@ -19,7 +19,7 @@ The INDILEX project processes legal judgment documents from multiple Indian High
 ### Recommended HuggingFace Repository Structure
 
 ```
-<your-username>/INDILEX-dataset/
+aniket821108/INDILEX-dataset/
 │
 ├── README.md                           # Dataset card (copy from docs/dataset.md)
 │
@@ -116,7 +116,7 @@ The INDILEX project processes legal judgment documents from multiple Indian High
 from huggingface_hub import snapshot_download
 
 snapshot_download(
-    repo_id="<your-username>/INDILEX-dataset",
+    repo_id="aniket821108/INDILEX-dataset",
     repo_type="dataset",
     local_dir="data/"
 )
@@ -126,11 +126,11 @@ snapshot_download(
 
 ```bash
 pip install huggingface_hub
-huggingface-cli download <your-username>/INDILEX-dataset --repo-type dataset --local-dir data/
+huggingface-cli download aniket821108/INDILEX-dataset --repo-type dataset --local-dir data/
 ```
 
 ### Option C: Manual Download
-Visit `https://huggingface.co/datasets/<your-username>/INDILEX-dataset` and download files individually.
+Visit `https://huggingface.co/datasets/aniket821108/INDILEX-dataset` and download files individually.
 
 ---
 
